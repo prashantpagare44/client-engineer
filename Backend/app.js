@@ -1,13 +1,20 @@
-const express = require("express");
-const cors = require("cors");
-const userModel = require("./models/userModel");
-const authroute = require("./routers/authroute"); // ✅ Fixed import issue
+import express from 'express';
+import cors from "cors";
+import dotenv from "dotenv";
+import User from "./models/userModel.js"; // Make sure you added `.js` in path
+
+import { authroute } from './routers/authroute.js';
+import clientRoutes from "./routers/clientRoute.js";
+import {Project } from './models'
+
+dotenv.config();
 
 const app = express();
 
 // ✅ Middlewares
 app.use(cors());
 app.use(express.json()); // For parsing JSON request bodies
+app.use('/api/client', clientRoutes);
 
 // ✅ Routes
 app.get("/", (req, res) => {
@@ -15,7 +22,7 @@ app.get("/", (req, res) => {
 });
 
 // ✅ Using Router
-app.use("/api/register", authroute); // Fixed route handling
+app.use("/api/auth", authroute); // Auth routes
 
 // ✅ Server Listening
 app.listen(3000, () => {

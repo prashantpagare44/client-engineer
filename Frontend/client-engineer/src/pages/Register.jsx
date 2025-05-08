@@ -28,13 +28,20 @@ function Register() {
       return;
     }
   
-    const updatedUsers = [...existingUsers, formData];
+    // Create new user with a fake token
+    const newUser = {
+      ...formData,
+      token: Math.random().toString(36).substr(2),  // Random fake token
+    };
+  
+    const updatedUsers = [...existingUsers, newUser];
   
     localStorage.setItem('users', JSON.stringify(updatedUsers));
   
     // Redirect to login
     navigate("/login");
   };
+  
   
 
   return (

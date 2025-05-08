@@ -1,9 +1,7 @@
-import express from 'express'
-import {registerUser} from '../controllers/authController'
+import express from 'express';
+import { registerUser, loginUser } from "../controller/authController.js";
 
-const router = express.Router();
+export const authroute = express.Router(); // Correctly named router
 
-router.post("/register",registerUser);
-
-
-export default router;
+authroute.post('/register', registerUser); // Use authroute here
+authroute.post('/login', loginUser);        // Use authroute here

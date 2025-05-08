@@ -14,7 +14,6 @@ function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     
-    // Mock authentication logic (Replace with API call)
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const user = users.find(
       (u) => u.email === formData.email && u.password === formData.password
@@ -25,15 +24,16 @@ function Login() {
       return;
     }
     
-    localStorage.setItem('user', JSON.stringify(user));
-    
+    // Instead of res.data.token (which doesn't exist), just set a fake token or user details
+    localStorage.setItem('token', JSON.stringify({ email: user.email, role: user.role }));
+  
     if (user.role === 'client') {
       navigate('/clientdashboard');
     } else {
       navigate('/engineerdashboard');
     }
   };
-
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat relative" 
       style={{ backgroundImage: "url('/login-bg.jpg')" }}>
